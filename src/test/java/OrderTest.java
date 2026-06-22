@@ -8,7 +8,7 @@ import pages.OrderPage;
 import java.util.stream.Stream;
 
 
-public class OrderTest extends Config{
+public class OrderTest extends BaseTest {
 
     @ParameterizedTest
     @MethodSource("orderParameters")

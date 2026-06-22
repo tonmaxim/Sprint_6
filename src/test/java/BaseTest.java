@@ -3,17 +3,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 
-public abstract class Config {
+public abstract class BaseTest {
 
     protected WebDriver driver;
 
-    public static final String pageUrl = "https://qa-scooter.education-services.ru/";
+    public static final String PAGE_URL = "https://qa-scooter.education-services.ru/";
 
     @BeforeEach
     void setup() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        driver.get(Config.pageUrl);
+        driver.get(BaseTest.PAGE_URL);
     }
 
     @AfterEach
