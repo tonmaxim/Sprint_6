@@ -17,7 +17,9 @@ public class MainPage {
     private final By headerOrderButton = By.xpath(".//button[@class = 'Button_Button__ra12g']");
 
     // Кнопка "Заказать" внизу
-    private final By downOrderButton = By.xpath("//*[@id=\"root\"]/div/div/div[4]/div[2]/div[5]/button");
+    private final By downOrderButton = By.xpath(".//button[@class = 'Button_Button__ra12g Button_Middle__1CSJM']");
+
+    private final By blockOfQuestions = By.xpath(".//div[@class = 'accordion']");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -61,6 +63,12 @@ public class MainPage {
         } else if (chooseOrderButton.equals("downOrderButton")) {
             downOrderButtonClick();
         }
+    }
+
+    // Ожидание блока с вопросами
+    public void waitBlockOfQuestions(){
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(blockOfQuestions));
     }
 
 }

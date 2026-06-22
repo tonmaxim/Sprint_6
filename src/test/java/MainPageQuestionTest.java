@@ -1,39 +1,21 @@
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.MainPage;
 
-import java.time.Duration;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class MainPageQuestionTest {
+public  class MainPageQuestionTest extends Config{
 
-    private WebDriver driver;
-
-    @BeforeEach
-    void setup() {
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://qa-scooter.education-services.ru/");
-    }
-
-    @ParameterizedTest
+        @ParameterizedTest
     @MethodSource("indexOfElementsAndExpectedText")
     void checkAnswer(int index, String expected){
         MainPage objMainPage = new MainPage(driver);
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.id("accordion__heading-0")));
+        objMainPage.waitBlockOfQuestions();
         objMainPage.getAnswerText(index);
         assertEquals(expected, objMainPage.getAnswerText(index));
     }
@@ -50,11 +32,5 @@ public class MainPageQuestionTest {
                 Arguments.of(7, "Да, обязательно. Всем самокатов! И Москве, и Московской области.")
         );
     }
-
-    @AfterEach
-    void quit(){
-        driver.quit();
-    }
-
 
 }

@@ -53,6 +53,9 @@ public class OrderPage {
     // Окно с сообщением об успешном создании заказа.
     private final By orderAccepted = By.xpath(".//div[contains(@class,'Order_ModalHeader__3FDaJ') and (text() = 'Заказ оформлен')]");
 
+    // Заголовок окна с подтвержденным заказом
+    private final By orderHeader = By.className("Order_Header__BZXOb");
+
     public OrderPage(WebDriver driver) {
         this.driver = driver;
     }
@@ -146,4 +149,11 @@ public class OrderPage {
     public void checkOrderAccepted(){
         driver.findElement(orderAccepted).isDisplayed();
     }
+
+    // Ожидание окна с подтвержденым заказом
+    public void waitOrderHeader(){
+        new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.elementToBeClickable(orderHeader));
+    }
+
 }
